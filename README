@@ -4,11 +4,10 @@ Because Discord, a multi-million dollar comapny, is INCAPABLE of running their o
 Discord Mirror is built on top of a rss mirror I forked from somewhere I don't remember, 
 and retooled to "use" the Discord API to grab the lastest linux deb file occasionally (checks daily). If a
 new file is found, it is downloaded and made available in a local deb file repository for download and use
-with apt. No update hook is planned for now, just a daily check using cron or anacron
+with apt. No update hook is planned for now, just a daily check using cron
 
 === DEPENDENCIES ===
     - bash: All the scripts are written for the bash shell
-    - git: Used to update the project and install it in the correct place
     - wget: Grabs the current discord.deb file
     - dpkg-dev: Supplies scripts used to generate Release and Packages.gz files
     - cron: Periodically checks for new .deb files
@@ -24,6 +23,6 @@ Running ./install.bash as root clones this directory into /opt/ and installs a .
     $ ./updateFeeds.bash
     $ ./debUpdate.bash
 
-updateFeeds.bash fetches the .deb file from discord and places it in the 'debs' folder, while debUpdate.bash creates a 'Release' and 'Packages.gz' for apt. If the update fails for any reason, running these commands may provide insight as to why
+updateFeeds.bash fetches the .deb file from discord and places it in the 'debs' folder, while debUpdate.bash creates a 'Release' and 'Packages.gz' file for apt. If the update fails for any reason, running these commands may provide insight as to why
 
 None of the scripts in this project ever run apt. It simply provides the deb files for apt to use. It is on the user to update their package archive and install any new packages when they release
