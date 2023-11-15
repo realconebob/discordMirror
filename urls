@@ -1,0 +1,2 @@
+# You could theoretically put more urls here, and as long as the link fetches the most current deb file it should probably work, but I've only tested this for discord's link
+https://discord.com/api/download/stable?platform=linux&format=deb
