@@ -30,7 +30,7 @@ install() {
         echo "deb [trusted=yes] file:/opt/discordMirror/debs ./" | tee "/etc/apt/sources.list.d/discordMirror.list" && \
 
         # Install a crontab for the nobody user to occasionally fetch packages
-        (crontab -u nobody -l 2>/dev/null; echo "0 */24 * * * bash /opt/discordMirror/cron/cronUpdate.bash") | crontab -u nobody - && \
+        (crontab -u nobody -l 2>/dev/null; echo "0 */3 * * * bash /opt/discordMirror/cron/cronUpdate.bash") | crontab -u nobody - && \
 
         echo "Installed!"
         
