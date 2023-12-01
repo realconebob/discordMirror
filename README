@@ -4,6 +4,7 @@ Because Discord, a multi-BILLION (with a b!) dollar comapny, is INCAPABLE of run
 Discord Mirror is built on top of a rss mirror I forked from somewhere I don't remember, and retooled to "use" the Discord API to grab the lastest linux deb file occasionally (checks daily). If a new file is found, it is downloaded and made available in a local deb file repository for download and use with apt. No update hook is planned for now, just a daily check using cron
 
 === DEPENDENCIES ===
+    - util-linux: setpriv in the install script to become root
     - bash: All the scripts are written for the bash shell
     - wget: Grabs the current discord.deb file
     - dpkg-dev: Supplies scripts used to generate Release and Packages.gz files
@@ -16,7 +17,7 @@ This script creates a folder (/opt/discordMirror/debs/) which is unconditionally
     $ git clone https://github.com/StrangestMan/discordMirror.git
     $ cd discordMirror
     # ./install.bash
-    # apt update
+    # apt update && apt install discord
 
 Running ./install.bash as root clones this directory into /opt/ and installs a .list file into /etc/apt/sources.list.d/ so that apt can recognize the trivial repo, and adds an cron tab to check for new deb files. Once installed, everything should run in the background without the need to intervene.
 

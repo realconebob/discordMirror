@@ -12,7 +12,8 @@ checkRoot() {
                 echo "This script must be run as root"
 
                 location="$(realpath $0)"
-                sudo su root -c "bash $location"
+                sudo setpriv --reuid root --regid root --groups root --inh-caps=-all bash "$location"
+                    # su doesn't work if you've disabled root through chsh, but setting the user and group should work on every system regardless of whether root is disabled or not
                 exit $?
         fi
 
