@@ -43,8 +43,7 @@ function checkRoot() {
 
 function installDM() {
     # Move folder to /opt/ and make it owned by "nobody", a generic unprivileged user
-    mkdir -p "$OPT_LOC" && \
-        cp -rvf "$PATHTO" "$OPT_LOC" && \
+    cp -rvf "$PATHTO" "$OPT_LOC" && \
         chown -R nobody:nogroup "$OPT_LOC" && \
 
         # Install a .list file into /etc/apt/sources.list.d/
