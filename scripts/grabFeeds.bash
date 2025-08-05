@@ -1,20 +1,27 @@
-#!/usr/bin/env bash
+#!/usr/bin/env -S bash
+
+# === grabFeeds.bash ===
+# Run wget on each line of the urls file
 
 # Read a file, then recursively run the wget wrapper to fetch feeds
-urlfile="./urls"
+URLFILE="./urls"
 WRAPPER_LOC="./scripts/wgetWrapper.bash"
-retstat=0
 
-while IFS='' read -r line || [[ -n "${line}" ]]; do
-    if [[ "${line}" == \#* ]] || [ -z "${line}" ]; then
-        continue
-    fi
-    
-    $WRAPPER_LOC $line
-    if (( $? != 0 )); then
-        retstat=1
-    fi
+function callWrapper() {
+    retstat=0
 
-done < $urlfile
+    while IFS='' read -r line || [[ -n "${line}" ]]; do
+        if [[ "${line}" == \#* ]] || [ -z "${line}" ]; then
+            continue
+        fi
 
-exit $retstat
+        if ! $WRAPPER_LOC "$line"; then
+            retstat=1
+        fi
+
+    done < $URLFILE
+    return $((retstat))
+}
+
+callWrapper
+exit $?
