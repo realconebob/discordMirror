@@ -51,6 +51,7 @@ function installDM() {
         echo "deb [trusted=yes] file:/opt/discordMirror/debs ./" | tee "/etc/apt/sources.list.d/discordMirror.list" && \
 
         # Install a crontab for the nobody user to occasionally fetch packages
+            # TODO: Run a check to make sure that if reinstallation is forced this rule is not duplicated
         (crontab -u nobody -l 2>/dev/null; echo "0 */3 * * * /usr/bin/bash -S bash /opt/discordMirror/cron/cronUpdate.bash") | crontab -u nobody - && \
         echo "Installed!";
 

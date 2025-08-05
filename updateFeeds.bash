@@ -22,8 +22,18 @@ function runInLocal() {
     return 0
 }
 
+function asNobody() {
+    if [[ "$(whoami)" != "root" ]]; then
+        sudo -u nobody /usr/bin/env -S bash "$FILENAME"
+        exit $?
+    fi
+
+    return 0;
+}
+
 # Grab feeds & generate index
 runInLocal && \
+    asNobody && \
     bash "$GRABFEEDS_LOC" && \
     bash "$DEBUPDATE_LOC";
 exit $?
