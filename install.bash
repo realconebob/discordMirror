@@ -18,7 +18,7 @@ function runInLocal() {
         exit $?
     fi
 
-    return 0
+    exit 0
 }
 
 function checkInstalled() {
@@ -38,12 +38,13 @@ function checkRoot() {
         exit $?
     fi
 
-    return 0
+    exit 0
 }
 
 function install() {
     # Move folder to /opt/ and make it owned by "nobody", a generic unprivileged user
-    cp -rvf "$PATHTO_FOLDER" "$OPT_LOC" && \
+    mkdir -p "$OPT_LOC" && \
+        cp -rvf "$PATHTO_FOLDER" "$OPT_LOC" && \
         chown -R nobody:nogroup "$OPT_LOC" && \
 
         # Install a .list file into /etc/apt/sources.list.d/

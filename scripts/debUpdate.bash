@@ -15,7 +15,7 @@ function runInLocal() {
         exit $?
     fi
 
-    return 0
+    exit 0
 }
 
 debUpdate() {

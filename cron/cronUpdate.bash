@@ -21,7 +21,7 @@ function runInLocal() {
         exit $?
     fi
 
-    return 0
+    exit 0
 }
 
 # Check to see if there's an old timestamp, any timestamp, or if the user is forcing an update
