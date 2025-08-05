@@ -18,7 +18,7 @@ function runInLocal() {
         exit $?
     fi
 
-    exit 0
+    return 0
 }
 
 function checkInstalled() {
@@ -38,13 +38,13 @@ function checkRoot() {
         exit $?
     fi
 
-    exit 0
+    return 0
 }
 
-function install() {
+function installDM() {
     # Move folder to /opt/ and make it owned by "nobody", a generic unprivileged user
     mkdir -p "$OPT_LOC" && \
-        cp -rvf "$PATHTO_FOLDER" "$OPT_LOC" && \
+        cp -rvf "$PATHTO" "$OPT_LOC" && \
         chown -R nobody:nogroup "$OPT_LOC" && \
 
         # Install a .list file into /etc/apt/sources.list.d/
@@ -60,5 +60,5 @@ function install() {
 runInLocal && \
     checkInstalled && \
     checkRoot && \
-    install;
+    installDM;
 exit $?

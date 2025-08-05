@@ -19,7 +19,7 @@ function runInLocal() {
         exit $?
     fi
 
-    exit 0
+    return 0
 }
 
 # Grab feeds & generate index
