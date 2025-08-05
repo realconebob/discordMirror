@@ -17,7 +17,7 @@ function grabRSS() {
 
     wget="$loc_wget --config $LOC_WGETRC $2 $1"
     echo "${wget}" && $wget
-    
+
     return $?
 }
 
@@ -41,7 +41,7 @@ function doOpts() {
 
     else
         echo "Please enter the url to an RSS feed"
-    
+
     fi
 
     return 1

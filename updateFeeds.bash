@@ -13,7 +13,7 @@ SOMEWHAT_REALDIR="$(realpath "$0")"
 FILENAME="${SOMEWHAT_REALDIR##*/}"
 PATHTO="${SOMEWHAT_REALDIR/$FILENAME/}"
 
-function runInLocal() {    
+function runInLocal() {
     if [[ "$(pwd)/" != "$PATHTO" ]]; then
         (cd "$PATHTO" && bash "$FILENAME")
         exit $?

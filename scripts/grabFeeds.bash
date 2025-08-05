@@ -14,7 +14,7 @@ function callWrapper() {
         if [[ "${line}" == \#* ]] || [ -z "${line}" ]; then
             continue
         fi
-        
+
         if ! $WRAPPER_LOC "$line"; then
             retstat=1
         fi
