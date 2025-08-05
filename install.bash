@@ -12,10 +12,10 @@ SOMEWHAT_REALDIR="$(realpath "$0")"
 FILENAME="${SOMEWHAT_REALDIR##*/}"
 PATHTO="${SOMEWHAT_REALDIR/$FILENAME/}"
 
-function runInLocal() {    
+function runInLocal() {
     if [[ "$(pwd)/" != "$PATHTO" ]]; then
         (cd "$PATHTO" && bash "$FILENAME")
-        return $?
+        exit $?
     fi
 
     return 0
@@ -35,7 +35,7 @@ function checkRoot() {
         echo "This script must be ran as root"
 
         sudo -u root "$ENV_LOC" bash "$FILENAME"
-        return $?
+        exit $?
     fi
 
     return 0

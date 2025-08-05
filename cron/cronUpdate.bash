@@ -18,7 +18,7 @@ PATHTO="${SOMEWHAT_REALDIR/$FILENAME/}"
 function runInLocal() {    
     if [[ "$(pwd)/" != "$PATHTO" ]]; then
         (cd "$PATHTO" && bash "$FILENAME" "$@")
-        return $?
+        exit $?
     fi
 
     return 0
