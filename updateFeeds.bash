@@ -23,7 +23,7 @@ function runInLocal() {
 }
 
 function asNobody() {
-    if [[ "$(whoami)" != "root" ]]; then
+    if [[ "$(whoami)" != "nobody" ]]; then
         sudo -u nobody /usr/bin/env -S bash "$FILENAME"
         exit $?
     fi
