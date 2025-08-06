@@ -24,6 +24,15 @@ function runInLocal() {
     return 0
 }
 
+function asNobody() {
+    if [[ "$(whoami)" != "nobody" ]]; then
+        sudo -u nobody /usr/bin/env -S bash "$FILENAME" "$@"
+        exit $?
+    fi
+
+    return 0;
+}
+
 # Check to see if there's an old timestamp, any timestamp, or if the user is forcing an update
 function checkTimestamp() {
     if [ -n "$($FINDSTAMP)" ] || [ ! -f $TIMESTAMP_NAME ] || [[ "$1" =~ -[fF] ]]; then
@@ -37,11 +46,12 @@ function checkTimestamp() {
             TSCONTENTS="${TSCONTENTS/STATUS/SUCCESS}"
         fi
 
-        echo "$TSCONTENTS" | tee $TIMESTAMP_NAME
+        echo "$TSCONTENTS" | tee -a $TIMESTAMP_NAME
     fi
 
     return $((retval))
 }
 
 runInLocal "$@" && \
+    asNobody "$@" && \
     checkTimestamp "$@"
