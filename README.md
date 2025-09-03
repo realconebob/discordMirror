@@ -9,8 +9,8 @@ Discord Mirror is built on top of a rss mirror, and retooled to "use" the Discor
 - env: Makes sure that things passed to bash are done so in a sane manner
 - bash: All the scripts are written for the bash shell
 - wget: Grabs the current discord.deb file
-- dpkg-dev: Supplies scripts used to generate Release and Packages.gz files
-- cron: Periodically checks for new .deb files
+- dpkg-dev: Supplies scripts used to generate `Release` and `Packages.gz` files
+- cron: Periodically checks for new `.deb` files
 
 ### SECURITY
 

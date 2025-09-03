@@ -9,7 +9,7 @@ SOMEWHAT_REALDIR="$(realpath "$0")"
 FILENAME="${SOMEWHAT_REALDIR##*/}"
 PATHTO="${SOMEWHAT_REALDIR/$FILENAME/}"
 
-function runInLocal() {    
+function runInLocal() {
     if [[ "$(pwd)/" != "$PATHTO" ]]; then
         (cd "$PATHTO" && bash "$FILENAME")
         exit $?
@@ -18,10 +18,10 @@ function runInLocal() {
     return 0
 }
 
-debUpdate() {
+function debUpdate() {
     cd "$DEBS_LOC" && \
-        dpkg-scanpackages . > "Release" && \
-        dpkg-scanpackages . | gzip -9c > "Packages.gz"
+        dpkg-scanpackages -m . > "Release" && \
+        dpkg-scanpackages -m . | gzip -9c > "Packages.gz"
 
     return $?
 }

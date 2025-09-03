@@ -1,7 +1,7 @@
 #!/usr/bin/env -S bash
 
 # === install.bash ===
-# Installs discordMirror into /opt/, creates a crontab to update the file, and creates a .list so apt can 
+# Installs discordMirror into /opt/, creates a crontab to update the file, and creates a .list so apt can
 # install the deb. This script should be run as root
 
 OPT_LOC="/opt/discordMirror"
@@ -47,11 +47,14 @@ function installDM() {
         chown -R nobody:nogroup "$OPT_LOC" && \
 
         # Install a .list file into /etc/apt/sources.list.d/
-        echo "deb [trusted=yes] file:/opt/discordMirror/debs ./" | tee "/etc/apt/sources.list.d/discordMirror.list" && \
+        echo -ne "deb [trusted=yes] file:/opt/discordMirror/debs ./\n" | tee "/etc/apt/sources.list.d/discordMirror.list" && \
+
+        # Install an Apt pre-update hook in /etc/apt/apt.conf.d/
+        echo -ne "APT::Update::Pre-Invoke {\"/opt/discordMirror/cron/cronUpdate.bash\";};\n" | tee "/etc/apt/apt.conf.d/1000discordUpdate" && \
 
         # Install a crontab for the nobody user to occasionally fetch packages
             # TODO: Run a check to make sure that if reinstallation is forced this rule is not duplicated
-        (crontab -u nobody -l 2>/dev/null; echo "0 */3 * * * /usr/bin/bash -S bash /opt/discordMirror/cron/cronUpdate.bash") | crontab -u nobody - && \
+        (crontab -u nobody -l 2>/dev/null; echo -ne "0 */3 * * * /usr/bin/bash -S bash /opt/discordMirror/cron/cronUpdate.bash\n") | crontab -u nobody - && \
         echo "Installed!";
 
     return 0

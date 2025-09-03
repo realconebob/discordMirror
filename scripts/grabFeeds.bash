@@ -23,5 +23,5 @@ function callWrapper() {
     return $((retstat))
 }
 
-callWrapper
+callWrapper;
 exit $?
