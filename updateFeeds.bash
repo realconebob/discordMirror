@@ -8,6 +8,7 @@
 # Update feeds
 GRABFEEDS_LOC="./scripts/grabFeeds.bash"
 DEBUPDATE_LOC="./scripts/debUpdate.bash"
+DEBCLEAN_LOC="./scripts/debClean.bash"
 
 SOMEWHAT_REALDIR="$(realpath "$0")"
 FILENAME="${SOMEWHAT_REALDIR##*/}"
@@ -35,5 +36,7 @@ function asNobody() {
 runInLocal && \
     asNobody && \
     bash "$GRABFEEDS_LOC" && \
+    bash "$DEBCLEAN_LOC" && \
     bash "$DEBUPDATE_LOC";
+
 exit $?
