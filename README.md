@@ -2,11 +2,11 @@
 
 ## Because Discord, a multi-BILLION (with a B!) dollar comapny, is INCAPABLE of running their own repository
 
-Discord Mirror is built on top of a rss mirror, and retooled to "use" the Discord API to grab the lastest linux deb file occasionally (checks daily). If a new file is found, it is downloaded and made available in a local deb file repository for "download" and use with apt. No update hook is planned for now, just a daily check using cron
+Discord Mirror is built on top of a rss mirror, and retooled to "use" the Discord API to grab the lastest linux deb file occasionally (checks daily). If a new file is found, it is downloaded and made available in a local deb file repository for "download" and use with apt
 
 ### DEPENDENCIES
 
-- env: Makes sure that things passed to bash are done so in a sane manner
+- env: Makes sure that arguments passed to bash are done so in a sane manner
 - bash: All the scripts are written for the bash shell
 - wget: Grabs the current discord.deb file
 - dpkg-dev: Supplies scripts used to generate `Release` and `Packages.gz` files
@@ -14,12 +14,12 @@ Discord Mirror is built on top of a rss mirror, and retooled to "use" the Discor
 
 ### SECURITY
 
-This script creates a folder (`/opt/discordMirror/debs/`) which is unconditionally trusted by apt. The root folder (`/opt/discordMirror`) is owned by the user "`nobody`", which has no permissions and can't be edited by anyone without root permissions. If someone were to get access to the nobody user, and then insert a url to a malicious deb package in the urls file in the discordMirror folder, they could potentially mimick another package and trick you into installing it. This is possible as some programs such as webservers run with the nobody user, however the average desktop linux user likely won't be vulnerable. Getting access to the nobody user is not as useful as getting access to an actual user, and it's definitely nowhere near as bad as getting root, but it could still be a hazard
+This script creates a folder (`/opt/discordMirror/debs/`) which is unconditionally trusted by apt. The root folder (`/opt/discordMirror`) is owned by the user "`nobody`", which has no permissions and can't be edited by anyone without root permissions. If someone were to get access to the nobody user, and then insert a url to a malicious deb package in the urls file in the discordMirror folder, they could potentially mimick another package and trick you into installing it. This is possible as some programs - such as web servers - run with the nobody user, however the average desktop linux user likely won't be vulnerable. Getting access to the nobody user is not as useful as getting access to an actual user, and it's definitely nowhere near as bad as getting root, but it could still be a hazard
 
 ### INSTALLING
 
 ```bash
-git clone https://github.com/StrangestMan/discordMirror.git
+git clone https://github.com/realconebob/discordMirror.git
 cd discordMirror
 sudo ./install.bash
 sudo apt update && sudo apt install discord
